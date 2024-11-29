@@ -20,11 +20,30 @@ function ToDo(){
         return;
     }
     const Mission = document.createElement("li");
-    Mission.innerHTML = `
-        <input type="checkbox" class="square">
+    Mission.innerHTML = `                               
+        <input type="checkbox" class="box">
         <label>${Word.value}</label>
         <button class="Rubbish">DEL</button>
-    `
+    `                                                       //加入一大段html的語法
+    const Rubbish = Mission.querySelector(".Rubbish");
+    const box = Mission.querySelector(".box");
+
+    box.addEventListener("change", function(){
+        if(box.checked){
+            Mission.style.textDecoration = 'line-through';
+            Mission.style.color = "#999";
+            List.append(Mission);
+        }else{
+            Mission.style.textDecoration = 'none';
+            Mission.style.color = "";
+            List.prepend(Mission);
+        }
+    });
+
+    Rubbish.addEventListener("click", function(){
+        Mission.remove();
+    });
+
     List.append(Mission);
     Word.value = "";
 }
